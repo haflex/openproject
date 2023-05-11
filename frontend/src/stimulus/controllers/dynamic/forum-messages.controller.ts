@@ -61,6 +61,7 @@ export default class ForumMessagesController extends Controller {
 
     const ckeditorField = this.replyTarget.querySelector('op-ckeditor') as HTMLElement;
 
+    // eslint-disable-next-line @typescript-eslint/no-unsafe-call,@typescript-eslint/no-unsafe-member-access
     void jQuery(ckeditorField)
       .data('editor')
       .then((editor:ICKEditorInstance) => editor.setData(result.content));
