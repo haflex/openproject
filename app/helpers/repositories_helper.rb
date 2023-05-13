@@ -242,11 +242,13 @@ module RepositoriesHelper
   def scm_vendor_tag(repository)
     select_tag('scm_vendor',
                scm_options(repository),
-               class: 'form--select repositories--remote-select',
+               class: 'form--select',
                data: {
                  url: url_for(controller: '/projects/settings/repository',
                               action: 'show',
-                              id: @project.id)
+                              id: @project.id),
+                 action: 'repository-settings#updateSelectedType',
+                 'repository-settings-target': 'scmVendor'
                },
                disabled: (repository && !repository.new_record?))
   end
