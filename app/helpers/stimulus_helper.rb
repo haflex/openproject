@@ -28,7 +28,9 @@
 
 module StimulusHelper
   def page_controller(name, dynamic: false)
+    # rubocop:disable Rails/HelperInstanceVariable
     @page_controller = name
     @page_controller_dynamic = dynamic
+    # rubocop:enable Rails/HelperInstanceVariable
   end
 end
