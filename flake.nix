@@ -35,9 +35,10 @@
 
         installPhase = ''
           mkdir $out
-          cp -r bin config db extra lib lib_static modules spec $out
-          cp Gemfile Gemfile.lock Gemfile.modules config.ru $out
+          cp -r * $out
         '';
+          #cp Gemfile Gemfile.lock Gemfile.modules config.ru $out
+          #cp -r bin config db extra lib lib_static modules spec $out
       };
       devShells.default = pkgs.mkShell {
         packages = with pkgs; [
