@@ -24,7 +24,6 @@
         inherit version;
 
         buildInputs = [
-          gems.ruby
           gems.env
         ];
 
@@ -36,10 +35,10 @@
 
         installPhase = ''
           mkdir $out
-          cp -r * $out
+          cp -r app bin config db extra lib lib_static modules spec $out
+          cp Gemfile Gemfile.lock Gemfile.modules config.ru Rakefile $out
         '';
-          #cp Gemfile Gemfile.lock Gemfile.modules config.ru $out
-          #cp -r bin config db extra lib lib_static modules spec $out
+          #cp -r * $out
       };
       packages.frontend = pkgs.buildNpmPackage {
         pname = "${name}-Frontend";
@@ -54,7 +53,6 @@
       devShells.default = pkgs.mkShell {
         packages = with pkgs; [
           gems.env
-          gems.ruby
         ];
       };
       devShells.bundix = pkgs.mkShell {
