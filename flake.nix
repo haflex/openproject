@@ -10,16 +10,17 @@
   outputs = { self, nixpkgs, flake-utils, ruby-nix }: flake-utils.lib.eachDefaultSystem (system:
     let
       pkgs = nixpkgs.legacyPackages.${system};
+      name = "OpenProject";
       gems = ruby-nix.lib pkgs {
-        name = "OpenProject";
+        inherit name;
         gemset = nix/gemset.nix;
         ruby = pkgs.ruby_3_2;
       };
       version = "12.5.4";
     in
     {
-      packages.default = pkgs.stdenvNoCC.mkDerivation {
-        pname = "OpenProject";
+      packages.backend = pkgs.stdenvNoCC.mkDerivation {
+        pname = "${name}-Backend";
         inherit version;
 
         buildInputs = [
@@ -40,6 +41,16 @@
           #cp Gemfile Gemfile.lock Gemfile.modules config.ru $out
           #cp -r bin config db extra lib lib_static modules spec $out
       };
+      packages.frontend = pkgs.buildNpmPackage {
+        pname = "${name}-Frontend";
+        inherit version;
+
+        src = ./frontend;
+
+        npmDepsHash = "sha256-cGrgMwhh/WfahMd8TbzHZ6PruU+4V7cogWJp8gMCIlI=";
+
+      };
+    
       devShells.default = pkgs.mkShell {
         packages = with pkgs; [
           gems.env
