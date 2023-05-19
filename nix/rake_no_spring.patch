@@ -1,0 +1,14 @@
+diff --git a/bin/rake b/bin/rake
+index 0ba8c48cba..17240489f6 100755
+--- a/bin/rake
++++ b/bin/rake
+@@ -1,9 +1,4 @@
+ #!/usr/bin/env ruby
+-begin
+-  load File.expand_path('spring', __dir__)
+-rescue LoadError => e
+-  raise unless e.message.include?('spring')
+-end
+ require_relative '../config/boot'
+ require 'rake'
+ Rake.application.run

@@ -29,9 +29,9 @@
 
         src = ./.;
 
-        #postFixup = ''
-        #  patchShebangs bin/
-        #'';
+        patches = [
+          nix/rake_no_spring.patch
+        ];
 
         installPhase = ''
           mkdir $out
