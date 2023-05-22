@@ -46,6 +46,11 @@
 
         src = ./frontend;
 
+        nativeBuildInputs = [
+          pkgs.python3
+          pkgs.nodejs
+        ];
+
         npmDepsHash = "sha256-cGrgMwhh/WfahMd8TbzHZ6PruU+4V7cogWJp8gMCIlI=";
 
       };
