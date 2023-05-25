@@ -44,12 +44,28 @@
         pname = "${name}-Frontend";
         inherit version;
 
-        src = ./frontend;
+        srcs = [
+          ./frontend
+          ./modules
+        ];
+        sourceRoot = "frontend";
 
         nativeBuildInputs = [
           pkgs.python3
           pkgs.nodejs
         ];
+
+        preBuild = ''
+          mkdir -p ../public/assets/
+          cp src/app/features/plugins/linked-plugins.module.ts.example src/app/features/plugins/linked-plugins.module.ts
+          cp src/app/features/plugins/linked-plugins.styles.sass.example src/app/features/plugins/linked-plugins.styles.sass
+        '';
+
+        postInstall = ''
+          cp -r ../public $out/
+        '';
+
+        #dontNpmBuild = true;
 
         npmDepsHash = "sha256-cGrgMwhh/WfahMd8TbzHZ6PruU+4V7cogWJp8gMCIlI=";
 
