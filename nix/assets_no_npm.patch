@@ -1,0 +1,16 @@
+diff --git a/lib/tasks/assets.rake b/lib/tasks/assets.rake
+index a90de7a9fe..525095eb35 100644
+--- a/lib/tasks/assets.rake
++++ b/lib/tasks/assets.rake
+@@ -63,11 +63,6 @@ namespace :assets do
+     Rake::Task['openproject:plugins:register_frontend'].invoke
+ 
+     puts "Building angular frontend"
+-    Dir.chdir Rails.root.join('frontend') do
+-      sh 'npm run build' do |ok, res|
+-        raise "Failed to compile angular frontend: #{res.exitstatus}" if !ok
+-      end
+-    end
+ 
+     Rake::Task['assets:rebuild_manifest'].invoke
+   end
